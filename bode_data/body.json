@@ -1,0 +1,8 @@
+{
+    "topic": "Daily Meeting",
+    "type": "1",
+    "timezone": "Asia/Tokyo",
+    "settings": {
+        "use_pmi": "false"
+    }
+}
