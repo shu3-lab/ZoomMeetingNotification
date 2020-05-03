@@ -5,7 +5,7 @@ import boto3
 from datetime import datetime as dt
 
 def lambda_handler(event, context):
-    # TODO implement
+    
     return create_meeting(event)
     
 def create_meeting(event):

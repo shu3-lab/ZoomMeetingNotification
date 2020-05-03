@@ -8,10 +8,19 @@ print('Loading function')
 
 
 def lambda_handler(event, context):
-    #print("Received event: " + json.dumps(event, indent=2))
+    
     message = event['Records'][0]['Sns']['Message']
     print("From SNS: " + message)
-    return post_slack(message)
+    result = post_slack(message)
+    if 'ok' in json.dumps(result):
+        body = json.dumps(result)
+    else:
+        body = 'NG!'
+        
+    return {
+        'statusCode': 200,
+        'body': "slack result is " + body
+    }
 
 def post_slack(message):
 
