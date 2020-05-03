@@ -2,9 +2,11 @@
 
 ## **This is the notification service which notifies us Zoom meeting URLs.**
 
-**It's structed on AWS and  all of functions  are made by managed service, e.g. lambda,DynamoDB,S3.**
+**It's structed on AWS and  all of functions  are made by managed service, e.g. lambda,DynamoDB,S3.**<br>
+The whole architecture is the below image.
+![ Architecture](https://user-images.githubusercontent.com/56756975/80899475-7ef0df00-8d4b-11ea-86c7-a255551eb341.png)
 
-## The target range of this repository is Zoom meeting notification functions.
+## The target range of this repository is Zoom meeting notification functions.(The range is a red frame in the above figure)
 
 ## *Create Zoom Meetings*
 
