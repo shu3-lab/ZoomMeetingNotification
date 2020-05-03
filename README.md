@@ -54,3 +54,7 @@ aws s3 mb s3//{bucket name}/{object key}
 aws s3 cp {file path} s3//{bucket name}/{object key}
 ```
 
+### Step Functions
+The State Machine is the below figure.<br>
+![stepfunctions_graph](https://user-images.githubusercontent.com/56756975/80899545-384fb480-8d4c-11ea-9ff5-ad1b60c23bbb.png)
+
