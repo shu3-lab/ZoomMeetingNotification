@@ -4,9 +4,12 @@
 
 **It's structed on AWS and  all of functions  are made by managed service, e.g. lambda,DynamoDB,S3.**<br>
 The whole architecture is the below image.
-![ Architecture](https://user-images.githubusercontent.com/56756975/80899475-7ef0df00-8d4b-11ea-86c7-a255551eb341.png)
 
-## The target range of this repository is Zoom meeting notification functions.(The range is a red frame in the above figure)
+<img src=https://user-images.githubusercontent.com/56756975/80899475-7ef0df00-8d4b-11ea-86c7-a255551eb341.png width=70%>
+
+<br>
+
+#### The target range of this repository is Zoom meeting notification functions.(The range is a red frame in the above figure)
 
 ## *Create Zoom Meetings*
 
@@ -14,7 +17,7 @@ A source code is 'create_meeting.py'.
 At first, it calls Create Meeting API delivered by Zoom.<br>
 If you want to understand details of API, **[read a official document.](https://marketplace.zoom.us/docs/api-reference/zoom-api/meetings/meetingcreate)** The JSON of request body is stored in S3 bucket, so this function get it and send it as payload.<br>
 When API execution is succeed, A Zoom Meeting ID is responsed.
-An ID is stored in DynamoDB.Result of this function is notified to Step Functions.
+The ID is stored in DynamoDB.Result of this function is notified to Step Functions.
 
 ## *Notify Zoom Meeting*
 
@@ -30,7 +33,7 @@ When a message is published to SNS, SNS call a lambda function which post the me
 <img width="329" alt="Failure Notice" src="https://user-images.githubusercontent.com/56756975/80901417-c5930900-8d4c-11ea-9a92-70f025754a16.png">
 
 
-## *Note of AWS Resources*
+## *Notes of AWS Resources*
 
 ### DynamoDB
 
@@ -48,16 +51,17 @@ aws dynamodb create-table --table-name 'meetings'
 - Create a bucket
 
 ```sh
-aws s3 mb s3//{bucket name}/{object key}
+aws s3 mb s3://{bucket name}/{object key}
 ```
 
 - Transfer local files
 
 ```sh
-aws s3 cp {file path} s3//{bucket name}/{object key}
+aws s3 cp {file path} s3://{bucket name}/{object key}
 ```
 
 ### Step Functions
+
 The State Machine is the below figure.<br>
 ![stepfunctions_graph](https://user-images.githubusercontent.com/56756975/80899545-384fb480-8d4c-11ea-9ff5-ad1b60c23bbb.png)
 
