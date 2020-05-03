@@ -20,12 +20,15 @@ An ID is stored in DynamoDB.Result of this function is notified to Step Function
 
 A source code is 'notify_meeting.py'. If creaton of Meetings is succeed, Step Functins calls a next function posts a Meeting URL to a Slack channenl.
 At first, the function get a Zoom Meeting ID of today from DynamoDB.
-<br>And next, it post a URL to Incoming Webhook which behave as Slack BOT. Please **[read a official document](https://api.slack.com/messaging/webhooks)** to understand details.
+<br>And next, it post a URL to Incoming Webhook which behave as Slack BOT. Please **[read a official document](https://api.slack.com/messaging/webhooks)** to understand details.<br>
+<img width="324" alt="Meeting Notice" src="https://user-images.githubusercontent.com/56756975/80901335-bf9d2800-8d4c-11ea-9371-c9c959d5d178.png">
 
 ## *Notify failure*
 
 A source code is 'notify_failure.py'.If creaton of Meetings is failed, Step Functins notifies SNS a message of failure.<br>
-When a message is published to SNS, SNS call a lambda function which post the message to Slack.
+When a message is published to SNS, SNS call a lambda function which post the message to Slack.<br>
+<img width="329" alt="Failure Notice" src="https://user-images.githubusercontent.com/56756975/80901417-c5930900-8d4c-11ea-9a92-70f025754a16.png">
+
 
 ## *Note of AWS Resources*
 
