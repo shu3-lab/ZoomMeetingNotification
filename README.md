@@ -66,6 +66,6 @@ The State Machine is the below figure.<br>
 ![stepfunctions_graph](https://user-images.githubusercontent.com/56756975/80899545-384fb480-8d4c-11ea-9ff5-ad1b60c23bbb.png)
 
 ## I've written about this application on my BLOG!
-The URL is https://qiita.com/Shu3/items/edacbfbea4b1b6aaf877.(It' written in Japanese.)
+The URL is https://qiita.com/Shu3/items/edacbfbea4b1b6aaf877 .(It' written in Japanese.)
 
 
