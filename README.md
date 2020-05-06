@@ -9,13 +9,18 @@ The whole architecture is the below image.
 
 <br>
 
-#### The target range of this repository is Zoom meeting notification functions.(The range is a red frame in the above figure)
+**The target range of this repository is Zoom meeting notification functions.(The range is a red frame in the above figure)**
+
+## *Functions*
+
+All of functions in this repository are made as lambda functions.
+So, they should be archived and transfered to S3 bucket to deploy.(The command to transfer is written below.)
 
 ## *Create Zoom Meetings*
 
 A source code is 'create_meeting.py'.
 At first, it calls Create Meeting API delivered by Zoom.<br>
-If you want to understand details of API, **[read a official document.](https://marketplace.zoom.us/docs/api-reference/zoom-api/meetings/meetingcreate)** The JSON of request body is stored in S3 bucket, so this function get it and send it as payload.<br>
+If you want to understand details of API, **[read a official document.](https://marketplace.zoom.us/docs/api-reference/zoom-api/meetings/meetingcreate)** The JSON of request body is stored in S3 bucket, so this function get it and send it as payload.The path of the JSON file is `/body_data/body.json`.<br>
 When API execution is succeed, A Zoom Meeting ID is responsed.
 The ID is stored in DynamoDB.Result of this function is notified to Step Functions.
 
@@ -39,7 +44,7 @@ When a message is published to SNS, SNS call a lambda function which post the me
 
 - Create a table
   
-```sh
+```bash
 aws dynamodb create-table --table-name 'meetings'
 --attribute-definitions '[{"AttributeName":"date","AttributeType": "S"}]'
 --key-schema '[{"AttributeName":"date","KeyType": "HASH"}]'
@@ -50,13 +55,13 @@ aws dynamodb create-table --table-name 'meetings'
 
 - Create a bucket
 
-```sh
+```bash
 aws s3 mb s3://{bucket name}/{object key}
 ```
 
 - Transfer local files
 
-```sh
+```bash
 aws s3 cp {file path} s3://{bucket name}/{object key}
 ```
 
