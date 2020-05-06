@@ -40,6 +40,8 @@ When a message is published to SNS, SNS call a lambda function which post the me
 
 ## *Notes of AWS Resources*
 
+To run the below commands, install [aws-cli](https://aws.amazon.com/jp/cli/).
+
 ### DynamoDB
 
 - Create a table
