@@ -26,7 +26,7 @@ To develop these functions, two libraries are mainly used.
     To use AWS resoures, e.g. DynamoDB, SNS, `boto3` which is deliverd from AWS for Python codes is used to access AWS resouces.
 
 
-## *Create Zoom Meetings*
+### *Create Zoom Meetings*
 
 A source code is 'create_meeting.py'.
 At first, it calls Create Meeting API delivered by Zoom.<br>
@@ -34,14 +34,14 @@ If you want to understand details of API, **[read a official document.](https://
 When API execution is succeed, A Zoom Meeting ID is responsed.
 The ID is stored in DynamoDB.Result of this function is notified to Step Functions.
 
-## *Notify Zoom Meeting*
+### *Notify Zoom Meeting*
 
 A source code is 'notify_meeting.py'. If creaton of Meetings is succeed, Step Functins calls a next function posts a Meeting URL to a Slack channenl.
 At first, the function get a Zoom Meeting ID of today from DynamoDB.
 <br>And next, it post a URL to Incoming Webhook which behave as Slack BOT. Please **[read a official document](https://api.slack.com/messaging/webhooks)** to understand details.<br>
 <img width="324" alt="Meeting Notice" src="https://user-images.githubusercontent.com/56756975/80901335-bf9d2800-8d4c-11ea-9371-c9c959d5d178.png">
 
-## *Notify failure*
+### *Notify failure*
 
 A source code is 'notify_failure.py'.If creaton of Meetings is failed, Step Functins notifies SNS a message of failure.<br>
 When a message is published to SNS, SNS call a lambda function which post the message to Slack.<br>
