@@ -15,6 +15,16 @@ The whole architecture is the below image.
 
 All of functions in this repository are made as lambda functions.
 So, they should be archived and transfered to S3 bucket to deploy.(The command to transfer is written below.)
+To develop these functions, two libraries are mainly used.
+
+1. urllib.request
+
+    To call Zoom API via Http Request, only `urllib.request` is used.
+
+2. boto3
+
+    To use AWS resoures, e.g. DynamoDB, SNS, `boto3` which is deliverd from AWS for Python codes is used to access AWS resouces.
+
 
 ## *Create Zoom Meetings*
 
