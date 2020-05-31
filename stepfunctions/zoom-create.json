@@ -1,0 +1,67 @@
+{
+    "Comment": "State Machine to control workflow of creating Zoom meetings",
+    "StartAt": "Get JWT Token",
+    "States": {
+      "Get JWT Token": {
+        "Type": "Task",
+        "InputPath": "$",
+        "Resource": "arn:aws:lambda:ap-northeast-1:************:function:generateJWT-GenerateJWT-***********",
+        "ResultPath": "$",
+        "Next": "Check JWT"
+      },
+      "Check JWT": {
+        "Type": "Choice",
+        "Choices": [
+          {
+            "Variable": "$.statusCode",
+            "NumericEquals": 200,
+            "Next": "Create Zoom Meeting"
+          },
+          {
+            "Variable": "$.body.generation",
+            "NumericEquals": 500,
+            "Next": "Notify failure"
+          }
+        ],
+        "Default": "Notify failure"
+      },
+      "Create Zoom Meeting": {
+        "Type": "Task",
+        "InputPath": "$",
+        "Resource": "arn:aws:lambda:ap-northeast-1:************:function:CreateZoomMeeting",
+        "ResultPath": "$",
+        "Next": "Check Result of Zoom"
+      },
+      "Check Result of Zoom": {
+        "Type": "Choice",
+        "Choices": [
+          {
+            "Variable": "$.Result",
+            "BooleanEquals": true,
+            "Next": "Notify meeting"
+          },
+          {
+            "Variable": "$.Result",
+            "BooleanEquals": false,
+            "Next": "Notify failure"
+          }
+        ],
+        "Default": "Notify failure"
+      },
+      "Notify meeting": {
+        "Type": "Task",
+        "Resource": "arn:aws:lambda:ap-northeast-1:************:function:NotifyZoomMeeting",
+        "InputPath": "$",
+        "End": true
+      },
+      "Notify failure": {
+        "Type": "Task",
+        "Resource": "arn:aws:states:::sns:publish",
+        "Parameters": {
+          "Message": "Zoom Creation is failed!",
+          "TopicArn": "arn:aws:sns:ap-northeast-1:************:NotyfySlack"
+        },
+        "End": true
+      }
+    }
+  }
